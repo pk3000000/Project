@@ -67,3 +67,107 @@ ushort, int, uint, long, ulong, float, double, decimal로 암시적 변환을 할 수 있�
 암시적 변환은 없음.
 
 --------------------------------------------------------------------------
+4. decimal (128bit 정수 및 실수형)
+
+근사 범위 - (-7.9 X 10(28) - 7.9 X 10(28)) / (10(0 - 28))
+
+decimal 처리 되게 하려면 접미사 m 사용. m이 없으면 double형으로 인식하여 컴파일 에러 발생. 예) 300.5m
+
+-변환
+
+정수 계열 type은 암시적으로 deciaml로 변환
+
+decimal myMoney = 300;
+
+부동 소수점 type과 decimal 사이에는 명시적으로 변환해 주어야 한다.
+
+Console.WriteLine(dec + dub); <== double type과 decimal type간의 연산은 허용되지 않음.
+
+: 오류 - Operator '+' cannot be applied to operands of type 'double' and 'decimal'
+
+
+Console.WriteLine(dec + (decimal)dub);  
+Console.WriteLine((double)dec + dub);
+
+이런 식으로 한쪽으로 명시적 캐스팅을 해주어야 함.
+----------------------------------------------------------------------------
+5. double (실수형)
+
+double x = 3d; 또는 x = 3D;
+
+변환 -
+
+부동소수점 둘 중 하나가 double이면 double로 계산, 부울식 또는 관계식에서는 bool형으로 계산.
+
+double type이 없는 경우 float형으로 계산. 부울식 또는 관계식에서는 bool형으로 계산.
+
+
+부동 소수점 식에 포함될 수 있는 것.
+
+ - 양수 및 음수 0
+ - 양수 및 음수 무한
+ - NaN(Not-a-Number)값 : 숫자가 아닌 값
+ - 0이 아닌 값의 유한 집합
+
+------------------------------------------------------------------------------
+6. enum (열거형)
+
+같은 종류의 상수를 명명하여 의미를 부여하여 사용할 수 있다.
+
+네임스페이스로 사용하는 것이 일반적이나 특정 클래스, 구조체 내에 열거형이 중첩될 수도 있다.
+
+enum Days {Sat, Sun, Mon, Tue, Wed, Thu, Fri}; // 첫번째 값이 0
+
+enum Days {Sat=1, Sun, Mon, Tue, Wed, Thu, Fri}; // 첫번째 값이 1
+
+enum Days : byte {Sat=1, Sun, Mon, Tue, Wed, Thu, Fri};  // default가 int형이지만 byte형으로 선언
+
+열거형으로 승인된 type은 byte, sbyte, short, ushort, int, uint, long 또는 ulong이 있다.
+
+int x = (int)Days.Sun;  // 열거형은 명시적 캐스팅으로 정수형으로 변환 가능 하다.
+
+public class EnumTest2
+{
+    enum Range : long { Max = 2147483648L, Min = 255L };
+    static void Main()
+    {
+        long x = (long)Range.Max;
+        long y = (long)Range.Min;
+        Console.WriteLine("Max = {0}", x);
+        Console.WriteLine("Min = {0}", y);
+    }
+}
+
+클래스 변수처럼 사용 가능하여 특정 상수 값을 대입하여 사용 가능하다.
+
+[Flags]
+public enum CarOptions
+{
+    // The flag for SunRoof is 0001.
+    SunRoof = 0x01,
+    // The flag for Spoiler is 0010.
+    Spoiler = 0x02,
+    // The flag for FogLights is 0100.
+    FogLights = 0x04,
+    // The flag for TintedWindows is 1000.
+    TintedWindows = 0x08,
+}
+
+class FlagTest
+{
+   static void Main()
+   {
+        // The bitwise OR of 0001 and 0100 is 0101.
+        CarOptions options = CarOptions.SunRoof | CarOptions.FogLights;
+
+        // Because the Flags attribute is specified, Console.WriteLine displays
+        // the name of each enum element that corresponds to a flag that has
+        // the value 1 in variable options.
+        Console.WriteLine(options);
+        // The integer value of 0101 is 5.
+        Console.WriteLine((int)options);
+    }
+}
+
+// optional한 값으로 사용하여 해당 flag 값이 적용되면 option을 추가할 수 있다.
+
