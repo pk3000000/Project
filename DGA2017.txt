@@ -1,0 +1,2 @@
+https://github.com/IsaacDLee/DGA2017
+https://github.com/IsaacDLee/Lecture_CSharp_2017
