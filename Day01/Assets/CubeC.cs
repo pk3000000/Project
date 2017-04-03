@@ -28,23 +28,21 @@ public class CubeC : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A))
         {
-            abc -= 0.01f;
-        }
+            Quaternion v3Rotation = Quaternion.Euler(0f, -30f, 0f);
+            Vector3 v3Direction = Vector3.forward;
+            Vector3 v3RotateDirection = v3Rotation * v3Direction;
 
+            gameObject.transform.position += v3RotateDirection;
+        }
         if (Input.GetKey(KeyCode.D))
         {
-            abc += 0.01f;
+            Quaternion v3Rotation = Quaternion.Euler(0f, 30f, 0f);
+            Vector3 v3Direction = Vector3.forward;
+            Vector3 v3RotateDirection = v3Rotation * v3Direction;
+
+            gameObject.transform.position += v3RotateDirection;
         }
 
-        if(Input.GetKeyUp(KeyCode.A))
-        {
-            abc = 0.0f;
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            abc = 0.0f;
-        }
 
         Debug.Log(Input.mousePosition);
 
