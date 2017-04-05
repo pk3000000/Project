@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeC : MonoBehaviour {
-
-    public float abc;
-    private int bbc;
+    
     private Vector3 dir = Vector3.forward;
 
 	// Use this for initialization
 	void Start () {
-        abc = 1.0f;
+        
 	}
 	
 	// Update is called once per frame
