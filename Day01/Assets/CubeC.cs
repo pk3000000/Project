@@ -16,33 +16,32 @@ public class CubeC : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.W) || Input.GetMouseButton(0)) // 누르는 중
         {
-            gameObject.transform.rotation *= Quaternion.Euler(10, 0, 0);
-            gameObject.transform.position += new Vector3(abc, 0.0f, 0.1f);
+            gameObject.transform.rotation *= Quaternion.Euler(10.0f, 0.0f, 0.0f);
+            gameObject.transform.position += new Vector3(0.0f, 0.0f, 0.1f);
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetMouseButton(1))
         {
-            gameObject.transform.rotation *= Quaternion.Euler(-10, 0, 0);
-            gameObject.transform.position += new Vector3(abc, 0.0f, -0.1f);
+            gameObject.transform.rotation *= Quaternion.Euler(-10.0f, 0.0f, 0.0f);
+            gameObject.transform.position += new Vector3(0.0f, 0.0f, -0.1f);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Quaternion v3Rotation = Quaternion.Euler(0f, -30f, 0f);
-            Vector3 v3Direction = Vector3.forward;
-            Vector3 v3RotateDirection = v3Rotation * v3Direction;
-
-            gameObject.transform.position += v3RotateDirection;
+            gameObject.transform.position += new Vector3(-0.1f, 0.0f, 0.0f);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            Quaternion v3Rotation = Quaternion.Euler(0f, 30f, 0f);
-            Vector3 v3Direction = Vector3.forward;
-            Vector3 v3RotateDirection = v3Rotation * v3Direction;
-
-            gameObject.transform.position += v3RotateDirection;
+            gameObject.transform.position += new Vector3(0.1f, 0.0f, 0.0f);
         }
-
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            abc = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            abc = 0;
+        }
 
         Debug.Log(Input.mousePosition);
 
