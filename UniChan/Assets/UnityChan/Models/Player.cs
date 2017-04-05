@@ -7,21 +7,21 @@ public class Player : MonoBehaviour {
     public float rotationSpeed = 360f;
     //private float gravity = -9.8f;
     private float jumpPower;
-    private int wa;
-    private static int count = 0;
-    private bool bjump;
-    private float pos;
     CharacterController con;
+    private int jumpHash1 = Animator.StringToHash("Jump1");
+    private int jumpHash2 = Animator.StringToHash("Jump2");
+    private int runStateHash = Animator.StringToHash("Base Layer.Run");
+    private int waitStateHash = Animator.StringToHash("Base Layer.Wait");
     Animator animator;
     Rigidbody rb;
+    private bool bjump;
 
 	// Use this for initialization
 	void Start () {
         con = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>(); 
-        wa = 0;
-        pos = 0;
+        
         bjump = false;
         jumpPower = 2800.0f * Time.deltaTime;
 
@@ -41,21 +41,33 @@ public class Player : MonoBehaviour {
             transform.LookAt(transform.position + forward);
         }
 
-
+        /*
         if(transform.position.y >= 0.07f && transform.position.y <= 0.081f)
         {
             bjump = false;
         }
-
+        */
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            /*
             if (!bjump)
             {
                // rb.AddForce(new Vector3(0, jumpPower, 0));
                 transform.position += new Vector3(0, jumpPower*Time.deltaTime, 0);
                 bjump = true;
+            }*/
+
+            AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0); // base index
+
+            if(animState.fullPathHash == runStateHash)
+            {
+                animator.SetTrigger(jumpHash2);
             }
+            else if(animState.fullPathHash == waitStateHash)
+            {
+                animator.SetTrigger(jumpHash1);
+            }
+            
         }
 
         
@@ -65,7 +77,7 @@ public class Player : MonoBehaviour {
         con.Move(dir * moveSpeed * Time.deltaTime);
 
         animator.SetFloat("Speed", con.velocity.magnitude);
-        animator.SetFloat("JumpWait", transform.position.y);
+        //animator.SetFloat("JumpWait", transform.position.y);
         
 	}
     
