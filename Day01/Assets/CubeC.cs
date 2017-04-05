@@ -3,31 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeC : MonoBehaviour {
-
-    public float abc;
-    private int bbc;
+    
+    private Vector3 dir = Vector3.forward;
 
 	// Use this for initialization
 	void Start () {
-        abc = 0.0f;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.W) || Input.GetMouseButton(0)) // 누르는 중
         {
+<<<<<<< HEAD
             gameObject.transform.rotation *= Quaternion.Euler(10.0f, 0.0f, 0.0f);
             gameObject.transform.position += new Vector3(0.0f, 0.0f, 0.1f);
+=======
+            //gameObject.transform.rotation *= Quaternion.Euler(10, 0, 0);
+            //gameObject.transform.position += new Vector3(0, 0, 0.1f);
+            //gameObject.transform.rotation *= Quaternion.Euler(10, 0, 0);
+            //gameObject.transform.TransformDirection(Vector3.forward);
+            //gameObject.transform.Translate(-1 * gameObject.transform.forward * Time.deltaTime * 2);
+            //gameObject.transform.position += gameObject.transform.forward;
+
+
+            //transform.Rotate(10 * Time.deltaTime, 0, 0);
+
+            //Vector3 forward = transform.forward;
+            //Vector3 right = transform.right;
+            //Vector3 up = transform.up;
+            // Zero out the y component of your forward vector to only get the direction in the X,Z plane
+            //forward.y = 0;
+            //right.y = 0;
+            //Vector3 headingAngle = Quaternion.LookRotation(forward) * new Vector3(1,1,1);
+
+            //if (headingAngle.y > 180f) headingAngle.y -= 360f;
+
+            transform.Rotate(180f * Time.deltaTime, 0,0,Space.Self);
+            
+            transform.Translate(dir.normalized * 7.0f * Time.deltaTime, Space.World);
+            
+
+            //transform.Rotate(transform.TransformDirection(transform.forward).normalized * 10f * Time.deltaTime, Space.World);
+>>>>>>> origin/master
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetMouseButton(1))
         {
+<<<<<<< HEAD
             gameObject.transform.rotation *= Quaternion.Euler(-10.0f, 0.0f, 0.0f);
             gameObject.transform.position += new Vector3(0.0f, 0.0f, -0.1f);
+=======
+            //gameObject.transform.rotation *= Quaternion.Euler(-10, 0, 0);
+            //gameObject.transform.position += new Vector3(0, 0, -0.1f);
+            //gameObject.transform.rotation *= Quaternion.Euler(-10, 0, 0);
+            //gameObject.transform.TransformDirection(Vector3.forward);
+            //gameObject.transform.Translate(gameObject.transform.forward * Time.deltaTime * 2);
+            //gameObject.transform.position += gameObject.transform.forward;
+            //transform.Rotate(transform.local)
+
+            //dir = transform.localPosition;
+            // transform.Rotate(dir);
+
+
+            //transform.Rotate(-10 * Time.deltaTime, 0, 0);
+            // transform.localRotation *= Quaternion.Euler(-60f * Time.deltaTime);
+            transform.Rotate(-180f * Time.deltaTime, 0, 0, Space.Self);
+            
+            transform.Translate(dir.normalized * -7.0f * Time.deltaTime, Space.World);
+            
+
+            //transform.Rotate(transform.TransformDirection(transform.forward).normalized * (-10f) * Time.deltaTime, Space.World);
+>>>>>>> origin/master
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+<<<<<<< HEAD
             gameObject.transform.position += new Vector3(-0.1f, 0.0f, 0.0f);
         }
         if (Input.GetKey(KeyCode.D))
@@ -41,6 +93,23 @@ public class CubeC : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.D))
         {
             abc = 0;
+=======
+           // abc = -60;
+            dir = Quaternion.Euler(0, -180f * Time.deltaTime, 0) * dir;
+            //transform.rotation *= Quaternion.Euler(0, -60 * Time.deltaTime, 0);
+            transform.Rotate(new Vector3(0, -180f * Time.deltaTime, 0), Space.World);
+            //dir = transform.localPosition;
+
+            //gameObject.transform.Rotate(new Vector3(0, -10, 0));
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+           // abc = 60;
+            dir = Quaternion.Euler(0, 180f * Time.deltaTime, 0) * dir;
+            transform.Rotate(new Vector3(0, 180f * Time.deltaTime, 0), Space.World);
+            //transform.Rotate(Vector3.up, 60 * Time.deltaTime);
+            //gameObject.transform.Rotate(new Vector3(0, 10, 0));
+>>>>>>> origin/master
         }
 
         Debug.Log(Input.mousePosition);
