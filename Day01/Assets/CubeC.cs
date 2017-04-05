@@ -35,7 +35,7 @@ public class CubeC : MonoBehaviour {
 
             //if (headingAngle.y > 180f) headingAngle.y -= 360f;
 
-            transform.Rotate(120f * Time.deltaTime, 0,0,Space.Self);
+            transform.Rotate(180f * Time.deltaTime, 0,0,Space.Self);
             
             transform.Translate(dir.normalized * 7.0f * Time.deltaTime, Space.World);
             
@@ -59,7 +59,7 @@ public class CubeC : MonoBehaviour {
 
             //transform.Rotate(-10 * Time.deltaTime, 0, 0);
             // transform.localRotation *= Quaternion.Euler(-60f * Time.deltaTime);
-            transform.Rotate(-120f * Time.deltaTime, 0, 0, Space.Self);
+            transform.Rotate(-180f * Time.deltaTime, 0, 0, Space.Self);
             
             transform.Translate(dir.normalized * -7.0f * Time.deltaTime, Space.World);
             
@@ -70,9 +70,9 @@ public class CubeC : MonoBehaviour {
         if (Input.GetKey(KeyCode.A))
         {
            // abc = -60;
-            dir = Quaternion.Euler(0, -120f * Time.deltaTime, 0) * dir;
+            dir = Quaternion.Euler(0, -180f * Time.deltaTime, 0) * dir;
             //transform.rotation *= Quaternion.Euler(0, -60 * Time.deltaTime, 0);
-            transform.Rotate(new Vector3(0, -120f * Time.deltaTime, 0), Space.World);
+            transform.Rotate(new Vector3(0, -180f * Time.deltaTime, 0), Space.World);
             //dir = transform.localPosition;
 
             //gameObject.transform.Rotate(new Vector3(0, -10, 0));
@@ -80,8 +80,8 @@ public class CubeC : MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
            // abc = 60;
-            dir = Quaternion.Euler(0, 120f * Time.deltaTime, 0) * dir;
-            transform.Rotate(new Vector3(0, 120f * Time.deltaTime, 0), Space.World);
+            dir = Quaternion.Euler(0, 180f * Time.deltaTime, 0) * dir;
+            transform.Rotate(new Vector3(0, 180f * Time.deltaTime, 0), Space.World);
             //transform.Rotate(Vector3.up, 60 * Time.deltaTime);
             //gameObject.transform.Rotate(new Vector3(0, 10, 0));
         }
