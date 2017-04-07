@@ -15,6 +15,10 @@ public class CubeC : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.W) || Input.GetMouseButton(0)) // 누르는 중
         {
+<<<<<<< HEAD
+            gameObject.transform.rotation *= Quaternion.Euler(10.0f, 0.0f, 0.0f);
+            gameObject.transform.position += new Vector3(0.0f, 0.0f, 0.1f);
+=======
             //gameObject.transform.rotation *= Quaternion.Euler(10, 0, 0);
             //gameObject.transform.position += new Vector3(0, 0, 0.1f);
             //gameObject.transform.rotation *= Quaternion.Euler(10, 0, 0);
@@ -41,10 +45,15 @@ public class CubeC : MonoBehaviour {
             
 
             //transform.Rotate(transform.TransformDirection(transform.forward).normalized * 10f * Time.deltaTime, Space.World);
+>>>>>>> origin/master
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetMouseButton(1))
         {
+<<<<<<< HEAD
+            gameObject.transform.rotation *= Quaternion.Euler(-10.0f, 0.0f, 0.0f);
+            gameObject.transform.position += new Vector3(0.0f, 0.0f, -0.1f);
+=======
             //gameObject.transform.rotation *= Quaternion.Euler(-10, 0, 0);
             //gameObject.transform.position += new Vector3(0, 0, -0.1f);
             //gameObject.transform.rotation *= Quaternion.Euler(-10, 0, 0);
@@ -65,10 +74,26 @@ public class CubeC : MonoBehaviour {
             
 
             //transform.Rotate(transform.TransformDirection(transform.forward).normalized * (-10f) * Time.deltaTime, Space.World);
+>>>>>>> origin/master
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+<<<<<<< HEAD
+            gameObject.transform.position += new Vector3(-0.1f, 0.0f, 0.0f);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            gameObject.transform.position += new Vector3(0.1f, 0.0f, 0.0f);
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            abc = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            abc = 0;
+=======
            // abc = -60;
             dir = Quaternion.Euler(0, -180f * Time.deltaTime, 0) * dir;
             //transform.rotation *= Quaternion.Euler(0, -60 * Time.deltaTime, 0);
@@ -84,8 +109,8 @@ public class CubeC : MonoBehaviour {
             transform.Rotate(new Vector3(0, 180f * Time.deltaTime, 0), Space.World);
             //transform.Rotate(Vector3.up, 60 * Time.deltaTime);
             //gameObject.transform.Rotate(new Vector3(0, 10, 0));
+>>>>>>> origin/master
         }
-
 
         Debug.Log(Input.mousePosition);
 
