@@ -1,0 +1,4 @@
+sceneSetups:
+- path: D:/github/Project/UniChan2/Assets/UniChan.unity
+  isLoaded: 1
+  isActive: 1
