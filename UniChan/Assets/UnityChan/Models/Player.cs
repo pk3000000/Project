@@ -32,11 +32,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if(transform.position.y == 0.0f)
-        {
-            bGround = true;
-        }
+        
 
         dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")); // h : x, v : z
 
@@ -50,13 +46,13 @@ public class Player : MonoBehaviour {
             transform.LookAt(transform.position + forward);
         }
 
-        if (bGround)
+        dir *= moveSpeed;
+
+        if (con.isGrounded)
         {
-            
+            // dir *= moveSpeed;
 
-            dir *= moveSpeed;
-
-            animator.SetFloat("Speed", con.velocity.magnitude);
+            bjump = false;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -71,25 +67,21 @@ public class Player : MonoBehaviour {
                     animator.SetTrigger(jumpHash1);
                     
                 }
-                //dir.y = jumpSpeed;
+                bjump = true;
                 //rb.AddForce(new Vector3(0, jumpSpeed*10, 0));
-                bGround = false;
-                transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime);
+                
             }
+           
 
         }
-        else
+
+        if(bjump)
         {
-            if (transform.position.y <= 0.0f)
-            {
-                transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-            }
-            else
-            {
-                transform.Translate(Vector3.down * gravity * Time.deltaTime);
-            }
-            
+            con.Move(Vector3.up * jumpSpeed * Time.deltaTime);
         }
+        
+        con.SimpleMove(dir);
+        animator.SetFloat("Speed", con.velocity.magnitude);
 
         //        dir.y -= gravity;
         /*
@@ -100,10 +92,6 @@ public class Player : MonoBehaviour {
                 */
 
 
-
-        con.Move(dir * Time.deltaTime);
-
-        
 
 
 
@@ -117,11 +105,7 @@ public class Player : MonoBehaviour {
 
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if(collision.gameObject.tag=="ground")
-        {
-            bGround = true;
-        }
-    }
+
+
+    
 }
