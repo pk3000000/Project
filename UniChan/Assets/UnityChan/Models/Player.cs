@@ -6,27 +6,22 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float rotationSpeed = 360f;
     public float jumpSpeed;
-    private float gravity = 20.0f;
-    private float jumpPower;
     CharacterController con;
     private int jumpHash1 = Animator.StringToHash("Jump1");
     private int jumpHash2 = Animator.StringToHash("Jump2");
     private int runStateHash = Animator.StringToHash("Base Layer.Run");
     private int waitStateHash = Animator.StringToHash("Base Layer.Wait");
-    private bool bGround;
     Animator animator;
-    Rigidbody rb;
     private bool bjump;
     Vector3 dir;
+    AnimatorStateInfo animState;
+    Animation animation;
+
     // Use this for initialization
     void Start () {
         con = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponentInChildren<Rigidbody>(); 
-        
         bjump = false;
-        bGround = false;
-        jumpPower = 2800.0f * Time.deltaTime;
         dir = Vector3.zero;
     }
 	
@@ -48,15 +43,14 @@ public class Player : MonoBehaviour {
 
         dir *= moveSpeed;
 
+        
         if (con.isGrounded)
         {
-            // dir *= moveSpeed;
-
             bjump = false;
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0); // base index
+                animState = animator.GetCurrentAnimatorStateInfo(0); // base index
 
                 if (animState.fullPathHash == runStateHash)
                 {
@@ -65,16 +59,11 @@ public class Player : MonoBehaviour {
                 else if (animState.fullPathHash == waitStateHash)
                 {
                     animator.SetTrigger(jumpHash1);
-                    
                 }
                 bjump = true;
-                //rb.AddForce(new Vector3(0, jumpSpeed*10, 0));
-                
             }
-           
-
         }
-
+        
         if(bjump)
         {
             con.Move(Vector3.up * jumpSpeed * Time.deltaTime);
@@ -82,30 +71,10 @@ public class Player : MonoBehaviour {
         
         con.SimpleMove(dir);
         animator.SetFloat("Speed", con.velocity.magnitude);
-
-        //        dir.y -= gravity;
-        /*
-                if (dir.y <= 0.0f)
-                {
-                    dir.y = 0.0f;
-                }
-                */
-
-
-
-
-
-
-        //transform.position = new Vector3(transform.position.x, pos, transform.position.z);
-
-        //con.Move(dir * moveSpeed * Time.deltaTime);
-
-
-        //animator.SetFloat("JumpWait", transform.position.y);
-
     }
 
-
-
-    
+    private void move(CharacterController conn)
+    {
+        conn.Move(Vector3.up * jumpSpeed * Time.deltaTime);
+    }
 }
