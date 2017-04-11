@@ -25,12 +25,14 @@ public class UniChan : MonoBehaviour {
     private float m_rotationY = 0.0f;
     private float m_rotationX = 0.0f;
     bool jumpFlag = false;
-    int jumpCount;
+    private float jumpCount;
+    Camera[] cameras;
 
     // Use this for initialization
     void Start () {
-        jumpCount = 0;
         shoulder = GameObject.Find("Character1_Spine");
+        jumpCount = 0;
+        cameras = Camera.allCameras;
     }
 
     // Update is called once per frame
@@ -56,11 +58,15 @@ public class UniChan : MonoBehaviour {
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            cameras[1].enabled = true;
+            cameras[0].enabled = false;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            cameras[1].enabled = false;
+            cameras[0].enabled = true;
         }
     }
 
@@ -177,6 +183,12 @@ public class UniChan : MonoBehaviour {
                                                                                        //jumpFlag = true;
                         Animator animator = playerObject.GetComponent<Animator>();
                         animator.SetBool("Jump", jumpFlag);
+                        jumpCount++;
+                        if(jumpCount>=2)
+                        {
+                            jumpCount = 0;
+                            jumpFlag = false;
+                        }
                     }
                }
             
@@ -229,8 +241,4 @@ public class UniChan : MonoBehaviour {
         jumpFlag = true;
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        jumpFlag = false;
-    }
 }
