@@ -6,18 +6,26 @@ public class Bullet : MonoBehaviour {
 
     private static readonly float bulletMoveSpeed = 10.0f;
     public GameObject hitEffectPrefab = null;
-    
+    Rigidbody rb;
     Vector3 vecAddPos;
+    Vector3 dir;
 
     // Use this for initialization
     void Start () {
-       
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        vecAddPos = (Vector3.forward * bulletMoveSpeed);
-        transform.position += ((transform.rotation * vecAddPos)*Time.deltaTime);
+        rb = GetComponent<Rigidbody>();
+        dir = Vector3.zero;
+        Camera[] subCamera = Camera.allCameras;
+        dir = subCamera[1].transform.forward;
+        vecAddPos = (dir * bulletMoveSpeed);
+        rb.AddForce(vecAddPos,ForceMode.VelocityChange);
+    }
+
+    // Update is called once per frame
+    void Update () {
+        //transform.Translate(transform.forward * Time.deltaTime);
+        //rb.AddForce(vecAddPos,ForceMode.VelocityChange);
+        //transform.position += ((vecAddPos)*Time.deltaTime);
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -27,5 +35,6 @@ public class Bullet : MonoBehaviour {
             Instantiate(hitEffectPrefab, transform.position, transform.rotation);
         }
         Destroy(gameObject);
+        
     }
 }
