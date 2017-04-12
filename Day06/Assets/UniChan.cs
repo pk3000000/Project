@@ -97,14 +97,14 @@ public class UniChan : MonoBehaviour {
 
             if (m_mouseLockFlag)
             {
-                if(m_rotationX < 80 && m_rotationX > 0)
+                if(m_rotationX < 30 && m_rotationX > 0)
                 {
                     addRotationX -= (Input.GetAxis("Mouse Y") * ROTATION_X_MOUSE);
 
                     m_rotationX += (addRotationX * Time.deltaTime);
                  
                 }
-                else if(m_rotationX>-80 && m_rotationX < 0)
+                else if(m_rotationX>-50 && m_rotationX < 0)
                 {
                     addRotationX -= (Input.GetAxis("Mouse Y") * ROTATION_X_MOUSE);
 
@@ -117,13 +117,13 @@ public class UniChan : MonoBehaviour {
 
                     m_rotationX += (addRotationX * Time.deltaTime);
                 }
-                else if(m_rotationX >= 80)
+                else if(m_rotationX >= 30)
                 {
-                    m_rotationX = 79;
+                    m_rotationX = 29;
                 }
-                else if(m_rotationX <= -80)
+                else if(m_rotationX <= -50)
                 {
-                    m_rotationX = -79;
+                    m_rotationX = -49;
                 }
             }
             transform.rotation = Quaternion.Euler(0, m_rotationY, 0);
@@ -173,25 +173,21 @@ public class UniChan : MonoBehaviour {
             
             //if(isGrounded())
             
-                if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpCount++;
+
+                if (jumpCount >= 2)
                 {
-                    if (jumpFlag)
-                    {
-                        Rigidbody rb = GetComponent<Rigidbody>();
-                        rb.AddForce(new Vector3(0f, 5f, 0), ForceMode.VelocityChange); // 무게 고려 x 속도량, impact : 무게 고려
-                                                                                       //rb.AddForce(new Vector3(0f, 250f, 0));
-                                                                                       //jumpFlag = true;
-                        Animator animator = playerObject.GetComponent<Animator>();
-                        animator.SetBool("Jump", jumpFlag);
-                        jumpCount++;
-                        if(jumpCount>=2)
-                        {
-                            jumpCount = 0;
-                            jumpFlag = false;
-                        }
-                    }
-               }
-            
+                    jumpFlag = false;
+                }
+                else
+                {
+                    jumpFlag = true;
+                    Rigidbody rb = GetComponent<Rigidbody>();
+                    rb.AddForce(new Vector3(0f, 5f, 0), ForceMode.VelocityChange); // 무게 고려 x 속도량, impact : 무게 고려
+                }
+            }
         }
 
         bool shootFlag = false;
@@ -221,10 +217,10 @@ public class UniChan : MonoBehaviour {
             animator.SetBool("Shoot", shootFlag);
             animator.SetFloat("SpeedX", addPosition.x);
             animator.SetBool("Shift", shiftFlag);
-            if(!jumpFlag)
-            {
-                animator.SetBool("Jump", jumpFlag);
-            }
+            
+            animator.SetBool("Jump", jumpFlag);
+            
+            
         }
     }
 
@@ -238,7 +234,10 @@ public class UniChan : MonoBehaviour {
 
     private void OnCollisionStay(Collision collision)
     {
-        jumpFlag = true;
+        jumpFlag = false;
+        jumpCount = 0;
+        Animator animator = playerObject.GetComponent<Animator>();
+        animator.SetBool("Jump", jumpFlag);
     }
 
 }

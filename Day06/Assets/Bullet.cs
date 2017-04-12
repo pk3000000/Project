@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    private static readonly float bulletMoveSpeed = 10.0f;
+    private static readonly float bulletMoveSpeed = 50.0f;
     public GameObject hitEffectPrefab = null;
     Rigidbody rb;
     Vector3 vecAddPos;
@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         dir = Vector3.zero;
         Camera[] subCamera = Camera.allCameras;
-        dir = subCamera[1].transform.forward;
+        dir = subCamera[0].transform.forward;
         vecAddPos = (dir * bulletMoveSpeed);
         rb.AddForce(vecAddPos,ForceMode.VelocityChange);
     }
