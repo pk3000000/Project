@@ -59,33 +59,14 @@ public class tank : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.O))
         {
-           
-                barrel.transform.rotation = Quaternion.Slerp(barrel.transform.rotation, 
-                    Quaternion.Euler(new Vector3(180f, barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z)), Time.deltaTime);
-                //barrel.transform.rotation *= Quaternion.Euler(10.0f, 0, 0);
-                //Quaternion.Lerp(barrel.transform.rotation, Quaternion.Euler(barrel.transform.eulerAngles.x, barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z), Time.deltaTime * 5);
-            
-            //else
-            //{
-            //    barrel.transform.rotation = Quaternion.Euler(180.0f, barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z);
-            //}
+            barrel.transform.eulerAngles = new Vector3(Mathf.LerpAngle(barrel.transform.eulerAngles.x, 20f, Time.deltaTime),
+                barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z);
         }
 
         if (Input.GetKey(KeyCode.P))
         {
-         //   if (barrel.transform.eulerAngles.x >= 90 && barrel.transform.eulerAngles.x <= 180)
-          //  {
-                barrel.transform.rotation = Quaternion.Slerp(barrel.transform.rotation, 
-                    Quaternion.Euler(new Vector3(90f, barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z)), Time.deltaTime);
-                // barrel.transform.rotation = Quaternion.Lerp(barrel.transform.rotation, Quaternion.Euler(0, 0, -10f), Time.deltaTime);
-
-                //                barrel.transform.rotation *= Quaternion.Euler(-10.0f, 0, 0);
-
-         //   }
-          //  else
-          //  {
-          //      barrel.transform.rotation = Quaternion.Euler(90.0f, barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z);
-          //  }
+            barrel.transform.eulerAngles = new Vector3(Mathf.LerpAngle(barrel.transform.eulerAngles.x, 90f, Time.deltaTime),
+                barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z);
         }
     }
 }
