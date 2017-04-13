@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            Vector3 vac = collision.gameObject.transform.right * 50f + collision.gameObject.transform.up * 50f;
+            Vector3 vac = new Vector3(Input.GetAxis("Horizontal") * 1000f, Input.GetAxis("Horizontal") * 1000f, 0);
             rb.AddForce(vac);
         }
     }

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day09_AnimationControl", "Day09_AnimationControl.csproj", "{5D8F2DF5-9D90-F813-D35F-7AB8E3F1B13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day09_AnimationControl.Editor", "Day09_AnimationControl.Editor.csproj", "{86FC36EB-9C42-71C8-CADC-25DA7762F325}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D8F2DF5-9D90-F813-D35F-7AB8E3F1B13A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8F2DF5-9D90-F813-D35F-7AB8E3F1B13A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8F2DF5-9D90-F813-D35F-7AB8E3F1B13A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8F2DF5-9D90-F813-D35F-7AB8E3F1B13A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FC36EB-9C42-71C8-CADC-25DA7762F325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FC36EB-9C42-71C8-CADC-25DA7762F325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FC36EB-9C42-71C8-CADC-25DA7762F325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FC36EB-9C42-71C8-CADC-25DA7762F325}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
