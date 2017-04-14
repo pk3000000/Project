@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class tank : MonoBehaviour {
 
+    public int HP;
+
     float horizontal;
     float vertical;
 
@@ -15,24 +17,26 @@ public class tank : MonoBehaviour {
     Camera tankView;
 
     GameObject barrel;
+    public GameObject bulletObject;
+    GameObject cloneBullet;
 
     float angle;
-
+    float bulletSpeed;
     private float rotationX = 0f;
+    Rigidbody brb;
 
     // Use this for initialization
     void Start () {
-        Camera[] cameras = Camera.allCameras;
-        tankView = cameras[1];
-        cameras[1].enabled = true;
-        Camera.main.enabled = false;
-
         barrel = GameObject.Find("Barrel");
-	}
+
+        bulletSpeed = 0;
+        
+   	}
 	
 	// Update is called once per frame
 	void Update () {
         moveTank();
+        Fire();
     }
 
     private void moveTank()
@@ -67,6 +71,39 @@ public class tank : MonoBehaviour {
         {
             barrel.transform.eulerAngles = new Vector3(Mathf.LerpAngle(barrel.transform.eulerAngles.x, 90f, Time.deltaTime),
                 barrel.transform.eulerAngles.y, barrel.transform.eulerAngles.z);
+        }
+    }
+
+    private void Fire()
+    {
+        if(Input.GetButton("Fire1"))
+        {
+            bulletSpeed += 50f * Time.deltaTime;
+
+            if (bulletSpeed > 50f)
+            {
+                bulletSpeed = 50f;
+            }
+        }
+        if(Input.GetButtonUp("Fire1"))
+        {
+            cloneBullet = Instantiate(bulletObject, barrel.transform.position + barrel.transform.up, barrel.transform.rotation);
+            brb = cloneBullet.GetComponent<Rigidbody>();
+            brb.AddForce(cloneBullet.transform.up * bulletSpeed, ForceMode.VelocityChange);
+            bulletSpeed = 0f;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Bullet")
+        {
+            HP -= 20;
+
+            if(HP <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
