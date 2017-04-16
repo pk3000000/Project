@@ -28,27 +28,33 @@ public class GM : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-        tank1 = Instantiate(tank1, new Vector3(26f, 0, 46f), Quaternion.Euler(0, 90f, 0));
-        tank2 = Instantiate(tank2, new Vector3(78f, 0, 46f), Quaternion.Euler(0, -90f, 0));
-        tank1.GetComponent<tank>().enabled = true;
-        tank2.GetComponent<tank>().enabled = false;
-        camera1 = tank1.transform.FindChild("Body").gameObject.GetComponentInParent<Camera>();
-        camera2 = tank2.transform.FindChild("Body").gameObject.GetComponentInParent<Camera>();
-       // camera1.enabled = true;
+
+        tank1.transform.position = new Vector3(26f, 0, 46f);
+        tank1.transform.rotation = Quaternion.Euler(0, 90f, 0);
+        tank2.transform.position = new Vector3(78f, 0, 46f);
+        tank2.transform.rotation = Quaternion.Euler(0, -90f, 0);
+       // tank2 = Instantiate(tank1, new Vector3(26f, 0, 46f), Quaternion.Euler(0, 90f, 0));
+        //tank1 = Instantiate(tank1, new Vector3(78f, 0, 46f), Quaternion.Euler(0, -90f, 0));
+        cameras = Camera.allCameras;
+        //camera1 = tank1.transform.FindChild("Body").GetComponent<Camera>();
+        //camera2 = tank2.transform.FindChild("Body").GetComponent<Camera>();
+        camera1 = cameras[1];
+        camera2 = cameras[2];
+        // camera1.enabled = true;
        // camera2.enabled = false;
        // time = 30;
-        selected = false;
-        camera1.enabled = true;
+        selected = true;
+        // camera1.enabled = true;
+        Camera.main.enabled = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        time -= Time.deltaTime;
+        
         if(time < 0)
         {
             
-            time = 30;
+            time = 10;
 
             if (selected)
             {
@@ -59,12 +65,17 @@ public class GM : MonoBehaviour {
             }
             else
             {
-                tank1.GetComponent<tank>().enabled = false;
                 tank2.GetComponent<tank>().enabled = true;
-                camera1.enabled = false;
+                tank1.GetComponent<tank>().enabled = false;
                 camera2.enabled = true;
+                camera1.enabled = false;
+               
             }
             selected = !selected;
+        }
+        else
+        {
+            time -= Time.deltaTime;
         }
     }
 

@@ -20,17 +20,21 @@ public class tank : MonoBehaviour {
     public GameObject bulletObject;
     GameObject cloneBullet;
 
+    CharacterController con;
+
     float angle;
     float bulletSpeed;
     private float rotationX = 0f;
     Rigidbody brb;
 
+    Vector3 moveCalc;
+
     // Use this for initialization
     void Start () {
-        barrel = GameObject.Find("Barrel");
-
+        barrel = transform.FindChild("Barrel").gameObject;//GameObject.Find("Barrel");
+        con = GetComponent<CharacterController>();
         bulletSpeed = 0;
-        
+        moveCalc = Vector3.zero;
    	}
 	
 	// Update is called once per frame
@@ -41,26 +45,21 @@ public class tank : MonoBehaviour {
 
     private void moveTank()
     {
-        if (Input.GetKey(KeyCode.A))
+        moveCalc = Vector3.zero;
+
+        if(con.isGrounded)
         {
-            horizontal = HOR_LEFT;
-            transform.rotation *= Quaternion.Euler(0, horizontal, 0);
+            moveCalc = new Vector3(0, 0, Input.GetAxis("Vertical"));
+            moveCalc = transform.TransformDirection(moveCalc);
+            moveCalc *= 10f;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            horizontal = HOR_RIGHT;
-            transform.rotation *= Quaternion.Euler(0, horizontal, 0);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            vertical = VER_UP;
-            transform.position += transform.forward * vertical * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            vertical = VER_DOWN;
-            transform.position += transform.forward * vertical * Time.deltaTime;
-        }
+
+        //moveCalc.y -= 20f * Time.deltaTime;
+        
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Horizontal")*10f, 0);
+        
+        con.SimpleMove(moveCalc);
+
         if (Input.GetKey(KeyCode.O))
         {
             barrel.transform.eulerAngles = new Vector3(Mathf.LerpAngle(barrel.transform.eulerAngles.x, 20f, Time.deltaTime),
@@ -78,11 +77,11 @@ public class tank : MonoBehaviour {
     {
         if(Input.GetButton("Fire1"))
         {
-            bulletSpeed += 50f * Time.deltaTime;
+            bulletSpeed += 100f * Time.deltaTime;
 
-            if (bulletSpeed > 50f)
+            if (bulletSpeed > 100f)
             {
-                bulletSpeed = 50f;
+                bulletSpeed = 100f;
             }
         }
         if(Input.GetButtonUp("Fire1"))
