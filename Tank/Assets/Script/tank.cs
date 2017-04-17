@@ -53,11 +53,11 @@ public class tank : MonoBehaviour {
             moveCalc = transform.TransformDirection(moveCalc);
             moveCalc *= 10f;
         }
-
-        //moveCalc.y -= 20f * Time.deltaTime;
         
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Horizontal")*10f, 0);
-        
+
+        //moveCalc.y -= 20f * Time.deltaTime;
+
         con.SimpleMove(moveCalc);
 
         if (Input.GetKey(KeyCode.O))
